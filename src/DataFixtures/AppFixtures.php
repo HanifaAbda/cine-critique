@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
         foreach ($movies as $movie) {
             for ($j = 0; $j < rand(2, 5); $j++) {
                 $review = new Review();
-                $review->setRatings(rand(1, 5))
+                $review->setRating(rand(1, 5))
                        ->setContent($faker->realTextBetween(50, 300))
                        ->setCreatedAt(new \DateTimeImmutable())
                        ->setMovie($movie);

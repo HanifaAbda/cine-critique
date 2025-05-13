@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Films{% endblock %}
+{% block title %}
+  {{ parent() }} - Movies
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="bg-gray-900">
+    <h1 class="text-center py-12 text-5xl font-bold text-white">Movies</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/HB/Desktop/cine-critique/src/Controller/MovieController.php</code></li>
-        <li>Your template at <code>C:/Users/HB/Desktop/cine-critique/templates/movie/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="max-w-[900px] mx-auto flex flex-col gap-4">
+      {% for movie in movies %}
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 shadow-lg rounded-lg hover:shadow-xl transition-all duration-300">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">{{ movie.title }}</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">{{ movie.summary }}</p>
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm text-gray-500 dark:text-gray-400">{{ movie.releaseDate|date('d/m/Y') }}</h3>
+            <a href="{{ path('movies_item', { id: movie.id }) }}" class="inline-flex items-center px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200">
+              Voir le film<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <div class="p-6 bg-red-100 border border-red-200 rounded-lg">
+          <p class="text-red-700 text-lg font-medium">Aucun film trouvé</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
+

@@ -200,4 +200,17 @@ class Movie
 
         return $this;
     }
+
+    public function getAverageRating(): ?float
+    {
+        if ($this->reviews->isEmpty()) {
+            return null;
+        }
+
+        $sum = 0;
+        foreach ($this->reviews as $review) {
+            $sum = $sum + $review->getRating();
+        }
+        return round($sum / count($this->reviews), 1);
+    }
 }

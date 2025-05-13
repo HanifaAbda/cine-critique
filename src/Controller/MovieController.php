@@ -22,11 +22,11 @@ final class MovieController extends AbstractController
         ]);
     }
 
-    #[Route('/movie/{id}', name:'movies_show')]
+    #[Route('/movies/{id}', name:'movies_item')]
 
-    public function show(Movie $movie): Response
+    public function item(Movie $movie): Response
     {
         //affiche un film correspondant à l'ID
-        return $this->render('movies/show.html.twig',['movie'=> $movie]);
+        return $this->render('movies/item.html.twig',['movie'=> $movie]);
     }
 }
