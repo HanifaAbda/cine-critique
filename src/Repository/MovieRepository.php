@@ -16,6 +16,7 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+
     //    /**
     //     * @return Movie[] Returns an array of Movie objects
     //     */
