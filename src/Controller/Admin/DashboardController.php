@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
+
     public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(id: AdminUrlGenerator::class);

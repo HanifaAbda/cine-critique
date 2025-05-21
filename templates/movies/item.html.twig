@@ -1,8 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h1>{{ movie.title }}</h1>
+  <div class="flex flex-col items-center justify-center min-h-screen px-6 md:px-12">
+    <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start justify-center text-white max-w-4xl w-full">
+      <div class="flex-shrink-0 mb-6 md:mb-0">
+        <img src="{{ movie.poster }}" alt="{{ movie.title }} poster" class="rounded-lg shadow-lg" />
+      </div>
 
-  <a href="{{ path('movies_list') }}">Retour à la liste</a>
+      <div class="flex-1 text-center md:text-left">
+        <h1 class="text-3xl font-semibold mb-4">{{ movie.title }}</h1>
+        <p class="text-lg text-gray-300 mb-4">{{ movie.summary }}</p>
+
+        <div class="mb-4">
+          <span class="text-gray-400">Release Date:</span>
+          <span>{{ movie.releaseDate|date('d/m/Y') }}</span>
+        </div>
+        <div class="mb-4">
+          <span class="text-gray-400">Directed by:</span>
+          <span>{{ movie.director }}</span>
+        </div>
+        <div class="mb-4">
+          <span class="text-gray-400">Main Actors:</span>
+          <span>{{ movie.mainActors }}</span>
+        </div>
+
+        <div class="mb-4">
+          <span class="text-gray-400">Categories:</span>
+          <span class="text-white">
+            {% for category in movie.categories %}
+              {{ category.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        <div class="flex justify-end mt-4">
+          <a href="{{ path('movies_item', { id: movie.id }) }}" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2">Donnez votre avis</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
-
