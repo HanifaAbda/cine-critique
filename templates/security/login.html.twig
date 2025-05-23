@@ -1,38 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}
+  Connexion
+{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-md w-[350px]">
+      {% for label, messages in app.flashes %}
+        {% for message in messages %}
+          <div class="mb-4 text-sm px-4 py-2 rounded 
+          {% if label == 'success' %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
+            {% elseif label == 'error' %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            {% elseif label == 'warning' %}
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {% endif %}
+        ">{{ message }}</div>
+        {% endfor %}
+      {% endfor %}
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
+      {% if error %}
+        <div class="mb-4 text-sm text-red-700 bg-red-100 p-2 rounded">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+      {% if app.user %}
+        <div class="mb-3 text-white">
+          Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-blue-400 underline">Déconnexion</a>.
+        </div>
+      {% endif %}
+
+      <h1 class="text-white text-xl font-bold mb-6 text-center">Connexion</h1>
+
+      <form method="post" class="space-y-5">
+        <div>
+          <label for="username" class="block mb-2 text-sm font-medium text-white">Email</label>
+          <input type="email" value="{{ last_username }}" name="_username" id="username" required autofocus class="w-full bg-white text-black border border-gray-300 text-sm rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div>
+          <label for="password" class="block mb-2 text-sm font-medium text-white">Mot de passe</label>
+          <input type="password" name="_password" id="password" required class="w-full bg-white text-black border border-gray-300 text-sm rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+        <div class="flex justify-center">
+          <button type="submit" class="my-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Se connecter</button>
+        </div>
+        <div class="text-center mt-4">
+          <p class="text-sm text-white">
+            Pas encore de compte ?
+            <a href="{{ path('app_registration') }}" class="text-blue-400 hover:underline">Créer un compte</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
 {% endblock %}

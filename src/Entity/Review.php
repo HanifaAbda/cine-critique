@@ -26,6 +26,10 @@ class Review
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?Movie $movie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +79,18 @@ class Review
     public function setMovie(?Movie $movie): static
     {
         $this->movie = $movie;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
