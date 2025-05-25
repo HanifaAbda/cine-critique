@@ -30,10 +30,14 @@ final class ReviewController extends AbstractController
         $review->setAuthor($this->getUser());
 
         $form = $this->createForm(ReviewTypeForm::class, $review);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            if($review->getCreatedAt() === null){
+                $review->setCreatedAt(new \DateTimeImmutable());
+            }
+            
 
             $em->persist($review);
             $em->flush();

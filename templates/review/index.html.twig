@@ -1,15 +1,114 @@
+{# templates/review/review.html.twig #}
 {% extends 'base.html.twig' %}
-
-{% block title %}Laisser une critique pour {{ movie.title }}{% endblock %}
-
-
+{% block title %}Laisser un avis{% endblock %}
 {% block body %}
-<div class="flex flex-col items-center">
+  <div class="max-w-xl mx-auto mt-10 p-6 shadow-lg text-white">
+    <h1 class="text-2xl font-bold mb-6">Laisser un avis pour "{{ movie.title }}"</h1>
+    {{ form_start(form) }}
+      <div class="flex items-center space-x-2 mb-4">
+        {# Les étoiles radios #}
+        <div class="flex items-center" id="star-rating">
+          {% for child in form.rating %}
+            {{ form_widget(child, {'attr': {'class': 'hidden', 'data-value': child.vars.value}}) }}
+            <label for="{{ child.vars.id }}" 
+                   class="cursor-pointer text-gray-400 text-4xl transition-colors duration-200 select-none star-label"
+                   data-rating="{{ child.vars.value }}">
+              &#9733;
+            </label>
+          {% endfor %}
+        </div>
+        {# Affichage de la note numérique #}
+        <span id="rating-value" class="ml-3 text-yellow-400 font-semibold">0 / 5</span>
+      </div>
+      <div class="mb-6">
+        {{ form_label(form.content, 'Votre avis', {'label_attr': {'class': 'block mb-2 font-semibold'}}) }}
+        {{ form_widget(form.content, {'attr': {'class': 'w-full p-3 h-48 rounded bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-yellow-400'}}) }}
+        {{ form_errors(form.content) }}
+      </div>
+      <button type="submit" class="bg-yellow-400 text-gray-900 font-bold py-2 px-6 rounded hover:bg-yellow-500 transition">
+        Envoyer
+      </button>
+    {{ form_end(form) }}
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const starContainer = document.getElementById('star-rating');
+      const starLabels = starContainer.querySelectorAll('.star-label');
+      const ratingInputs = document.querySelectorAll('input[name="{{ form.rating.vars.full_name }}"]');
+      const ratingValueSpan = document.getElementById('rating-value');
+      let currentRating = 0;
 
-</div>
+      // Fonction pour mettre à jour l'affichage des étoiles
+      function updateStars(rating, isHover = false) {
+        starLabels.forEach((label, index) => {
+          const starValue = parseInt(label.dataset.rating);
+          if (starValue <= rating) {
+            label.classList.remove('text-gray-400');
+            label.classList.add('text-yellow-400');
+          } else {
+            label.classList.remove('text-yellow-400');
+            label.classList.add('text-gray-400');
+          }
+        });
+      }
 
+      // Fonction pour mettre à jour la valeur affichée
+      function updateRatingValue(rating) {
+        ratingValueSpan.textContent = rating + ' / 5';
+      }
 
-{% endblock %}
+      // Gestion du hover
+      starLabels.forEach((label) => {
+        label.addEventListener('mouseenter', () => {
+          const hoverRating = parseInt(label.dataset.rating);
+          updateStars(hoverRating, true);
+          updateRatingValue(hoverRating);
+        });
+      });
 
+      // Restaurer l'état au survol du conteneur
+      starContainer.addEventListener('mouseleave', () => {
+        updateStars(currentRating);
+        updateRatingValue(currentRating);
+      });
 
+      // Gestion du clic
+      starLabels.forEach((label) => {
+        label.addEventListener('click', () => {
+          const selectedRating = parseInt(label.dataset.rating);
+          currentRating = selectedRating;
+          
+          // Cocher le bon radio button
+          const targetInput = document.querySelector(`input[data-value="${selectedRating}"]`);
+          if (targetInput) {
+            targetInput.checked = true;
+          }
+          
+          updateStars(selectedRating);
+          updateRatingValue(selectedRating);
+        });
+      });
+
+      // Initialisation si une valeur est déjà sélectionnée
+      ratingInputs.forEach(input => {
+        if (input.checked) {
+          currentRating = parseInt(input.dataset.value);
+          updateStars(currentRating);
+          updateRatingValue(currentRating);
+        }
+      });
+
+      // Gestion des changements sur les inputs (au cas où)
+      ratingInputs.forEach(input => {
+        input.addEventListener('change', () => {
+          if (input.checked) {
+            currentRating = parseInt(input.dataset.value);
+            updateStars(currentRating);
+            updateRatingValue(currentRating);
+          }
+        });
+      });
+    });
+  </script>
 {% endblock %}
