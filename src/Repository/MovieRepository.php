@@ -16,26 +16,14 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-    public function findByTitleAndCategory(?string $title, ?int $categoryId):array 
+    public function findByTitle(?string $title):array 
     {
-        
-        $qb = $this->createQueryBuilder('m')
-            ->leftJoin('m.categories', 'c')
-            ->addSelect('c');
-
-        if($title) {
-            $qb->andWhere('m.title LIKE :title' )
-                ->setParameter('title', '%' . $title .'%'); 
-        }
-
-        if ($categoryId) {
-            $qb->andWhere('c.id = :categoryId')
-                ->setParameter('categoryId', $categoryId);
-        }
-
-        return $qb->orderBy('m.createdAt', 'DESC')
-                    ->getQuery()
-                    ->getResult();
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->orderBy('m.id', 'ASC')
+            ->getQuery()
+            ->getResult();
 
     }       
 

@@ -8,23 +8,7 @@
 
 
         <div class="flex items-center space-x-4 lg:space-x-6 lg:w-auto w-full justify-between">
-            <!-- Barre de recherche -->
-            <div class="flex-1 lg:flex lg:items-center">
-                <form method="get" action="{{ path('app_homepage') }}" class="w-full lg:w-auto flex items-center space-x-2">
-                    <!-- Champ de recherche -->
-                    <input type="text" 
-                    name="query" 
-                    value="{{ searchQuery|default('') }}" 
-                    placeholder="Search for a movie" 
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 light:placeholder-white dark:text-black"/>
-
-                    
-                    <!-- Bouton de recherche -->
-                    <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 mr-100">
-                        Rechercher
-                    </button>
-                </form>
-            </div>
+           
             <!-- Boutons de login et inscription -->
             <div class="flex items-center lg:order-2 space-x-4">
                 {% if app.user %}

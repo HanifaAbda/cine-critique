@@ -237,6 +237,62 @@ class AppFixtures extends Fixture
                 'mainActors' => 'Jesse Eisenberg, Andrew Garfield',
                 'categories' => ['Drame'],
             ],
+            [
+                'title' => 'Parasite',
+                'poster' => 'https://posters.movieposterdb.com/21_11/2019/6751668/l_6751668_0d0409c5.jpg',
+                'summary' => 'La famille Kim, vivant dans la pauvreté, infiltre progressivement la riche famille Park en usurpant différentes identités. Une satire sociale mordante qui bascule en thriller tendu. Palme d’Or à Cannes, le film questionne les inégalités avec brio.',
+                'releaseDate' => new \DateTime('2019-05-30'),
+                'director' => 'Bong Joon-ho',
+                'mainActors' => 'Song Kang-ho, Choi Woo-shik',
+                'categories' => ['Drame', 'Thriller'],
+            ],
+            [
+                'title' => 'La La Land',
+                'poster' => 'https://posters.movieposterdb.com/21_08/2016/3783958/l_3783958_2e477f92.jpg',
+                'summary' => 'Sebastian, pianiste de jazz, et Mia, actrice en devenir, tombent amoureux à Los Angeles. Mais leurs rêves respectifs menacent leur relation. Une comédie musicale moderne aux couleurs éclatantes, entre hommage au cinéma classique et mélancolie contemporaine.',
+                'releaseDate' => new \DateTime('2016-12-07'),
+                'director' => 'Damien Chazelle',
+                'mainActors' => 'Ryan Gosling, Emma Stone',
+                'categories' => ['Comédie', 'Drame'],
+            ],
+            [
+                'title' => 'The Grand Budapest Hotel',
+                'poster' => 'https://posters.movieposterdb.com/21_12/2014/2278388/l_2278388_f1420555.jpg',
+                'summary' => 'Le légendaire concierge Gustave H. est accusé de meurtre dans un hôtel luxueux en Europe de l’Est. Avec son fidèle groom Zéro, il tente de prouver son innocence. Une aventure rocambolesque, visuellement somptueuse, signée Wes Anderson.',
+                'releaseDate' => new \DateTime('2014-02-26'),
+                'director' => 'Wes Anderson',
+                'mainActors' => 'Ralph Fiennes, Tony Revolori',
+                'categories' => ['Comédie', 'Drame'],
+            ],
+            [
+                'title' => 'Coco',
+                'poster' => 'https://posters.movieposterdb.com/19_12/2017/2380307/l_2380307_0d92bcc1.jpg',
+                'summary' => 'Miguel rêve de devenir musicien malgré l’interdiction de sa famille. Il se retrouve accidentellement dans le monde des morts et cherche à découvrir l’histoire de ses ancêtres. Un film coloré et émouvant sur la famille et la mémoire.',
+                'releaseDate' => new \DateTime('2017-11-22'),
+                'director' => 'Lee Unkrich, Adrian Molina',
+                'mainActors' => 'Anthony Gonzalez, Gael García Bernal',
+                'categories' => ['Animation', 'Famille'],
+            ],
+            [
+                'title' => 'Gone Girl',
+                'poster' => 'https://posters.movieposterdb.com/14_10/2014/2267998/l_2267998_4abdc3a9.jpg',
+                'summary' => 'Le jour de son cinquième anniversaire de mariage, Nick découvre la disparition de sa femme Amy. Très vite, les soupçons se tournent vers lui. Manipulations, médias et mensonges s’entremêlent dans ce thriller haletant.',
+                'releaseDate' => new \DateTime('2014-10-08'),
+                'director' => 'David Fincher',
+                'mainActors' => 'Ben Affleck, Rosamund Pike',
+                'categories' => ['Thriller', 'Drame'],
+            ],
+            [
+                'title' => 'Dune',
+                'poster' => 'https://posters.movieposterdb.com/21_08/2021/1160419/l_1160419_565d3d10.jpg',
+                'summary' => 'Sur la planète désertique Arrakis, Paul Atreides doit survivre à des complots politiques et découvrir sa destinée messianique. Adapté du roman culte, Dune offre une fresque épique et visuellement impressionnante.',
+                'releaseDate' => new \DateTime('2021-09-15'),
+                'director' => 'Denis Villeneuve',
+                'mainActors' => 'Timothée Chalamet, Rebecca Ferguson',
+                'categories' => ['Science-fiction', 'Drame'],
+            ],
+
+
         ];
 
         $movies = [];

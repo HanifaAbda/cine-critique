@@ -3,7 +3,9 @@
 {% block title %}Index{% endblock %}
 
 {% block body %}
-    
+
+       {% include 'nav.html.twig' with {'categories': categories} %}
+
        {% include 'movies/list.html.twig' with { movies: movies } %}
     
 {% endblock %}

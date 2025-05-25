@@ -19,12 +19,12 @@ final class IndexController extends AbstractController
                         
     ): Response
     {
-        $movies = $movieRepository->findAll();
-        $query = $request->query->get('query');
-        $categoryId = $request->query->get('category');
 
-        if($query || $categoryId) {
-            $movies = $movieRepository->findByTitleAndCategory($query, $categoryId);
+        $query = $request->query->get('query');
+        
+
+        if($query) {
+            $movies = $movieRepository->findByTitle($query);
         } else {
             
             $movies = $movieRepository->findBy([],['createdAt' => 'DESC'] );
@@ -36,7 +36,6 @@ final class IndexController extends AbstractController
         return $this->render('index/home.html.twig', [
             'movies' => $movies,
             'categories' => $categories,
-            'selectedCategory' => $categoryId,
             'searchQuery' => $query,
         ]);
     }

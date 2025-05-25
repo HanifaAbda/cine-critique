@@ -30,6 +30,7 @@ final class MovieController extends AbstractController
         MovieRepository $movieRepository,
         CategoryRepository $categoryRepository
     ): Response {
+        
         $query = $request->query->get('query');
         $categoryId = $request->query->get('category');
 
